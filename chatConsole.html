@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Chat Console | IChatApp.Com - Stay Always Connected With Your Loved Ones
+    </title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon" />
+    <style>
+      @font-face {
+        font-family: Gilroy-Medium;
+        src: url("fonts/Gilroy-Medium.ttf");
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Gilroy-Medium;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+
+      :root {
+        --primaryColour: #1e90ff;
+        --backgroundColour: #f0f8ff;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .profileSec {
+        height: 100%;
+        width: 100%;
+        background-color: var(--backgroundColour);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2rem;
+      }
+
+      .profileDetsSec {
+        height: 100%;
+        width: 30%;
+        background-color: white;
+        border-radius: 8.75px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+      }
+
+      .chatConsole {
+        height: 100%;
+        width: 70%;
+        background-color: white;
+        border-radius: 8.75px;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+      }
+
+      .profileInfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .dpImg {
+        height: 150px;
+        width: 150px;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: var(--primaryColour);
+        margin: 0 0 1rem 0;
+        position: relative;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+          rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+      }
+
+      .dpImg > i {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        font-size: 145px;
+        color: rgba(128, 128, 128, 0.2);
+        background-color: white;
+        border-radius: inherit;
+      }
+
+      .dpImg > img {
+        height: 140px;
+        width: 140px;
+        object-fit: cover;
+        object-position: center;
+        z-index: 1;
+        border-radius: 50%;
+      }
+
+      .profileInfo > i {
+        font-size: 3rem;
+        color: var(--primaryColour);
+        margin-bottom: 0.4rem;
+      }
+
+      .profileInfo > h6:nth-child(3) {
+        font-size: 1.8rem;
+      }
+
+      .profileInfo > h6:nth-child(4) {
+        font-size: 1rem;
+        color: rgba(0, 0, 0, 0.5);
+      }
+
+      .participants {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-direction: column;
+      }
+
+      .participants > .room > h6:nth-child(1) {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: var(--primaryColour);
+        text-align: center;
+      }
+
+      .participants > .room > h6:nth-child(2) {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+        background-color: var(--primaryColour);
+        color: white;
+        display: inline-block;
+        padding: 10px 30px;
+        border-radius: 8.75px;
+      }
+      .participants > .room > h6:nth-child(3) {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 0.75rem;
+        color: rgba(0, 0, 0, 0.75);
+      }
+
+      .participantsConsole {
+        height: 200px;
+        width: 90%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 8.75px;
+        flex-direction: column;
+        background-color: white;
+        overflow-y: scroll;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+      }
+
+      .participantsConsole::-webkit-scrollbar {
+        display: none;
+      }
+
+      .participantsConsole > span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 1rem;
+        padding: 0 2rem;
+        flex-shrink: 0;
+        width: 90%;
+        height: 75px;
+        background-color: var(--backgroundColour);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--primaryColour);
+        border-radius: 8.75px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      }
+
+      .participantsConsole > span > .parImg {
+        height: 55px;
+        width: 55px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        background-color: var(--primaryColour);
+      }
+
+      .participantsConsole > span > .parImg > i {
+        font-size: 50px;
+        border-radius: inherit;
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: rgba(128, 128, 128, 0.2);
+      }
+
+      .participantsConsole > span > .parImg > img {
+        height: 45px;
+        width: 45px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: inherit;
+        z-index: 1;
+      }
+
+      .participantsConsole > span > h6 {
+        letter-spacing: 1px;
+        font-style: italic;
+        font-weight: 450;
+        font-size: 1.3rem;
+      }
+
+      .participantsConsole > span:last-child {
+        margin-bottom: 1rem;
+      }
+
+      .chatConsole {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+      }
+
+      .chatConsole > .chatNav {
+        height: 10%;
+        width: 100%;
+        border-radius: 8.75px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      }
+
+      .chatConsole > .chatsArea {
+        height: 80%;
+        width: 100%;
+        overflow: hidden;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+        border-radius: 8.75px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      }
+
+      .chatsArea::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chatConsole > .chatCtrl {
+        height: 10%;
+        width: 100%;
+        border-radius: 8.75px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      }
+
+      .chatNav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+      }
+
+      .chatNav > i {
+        color: var(--primaryColour);
+        font-size: 2.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chatNav > i > span {
+        font-size: 1.8rem;
+        margin-left: 8px;
+        font-family: gilroy;
+        font-weight: 650;
+        letter-spacing: 1px;
+      }
+
+      .chatNav > h6 {
+        color: var(--primaryColour);
+        font-size: 1rem;
+        letter-spacing: 1px;
+        font-style: italic;
+      }
+
+      .chatNav > a > button {
+        height: 40px;
+        width: 120px;
+        background-color: rgba(30, 144, 255, 0.9);
+        color: white;
+        border: none;
+        border-radius: 8.75px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .chatNav > a > button:hover {
+        background-color: var(--primaryColour);
+      }
+
+      .msg {
+        height: fit-content;
+        width: fit-content;
+        padding: 15px;
+        background-color: var(--primaryColour);
+        color: white;
+        font-size: 1.2rem;
+        border-radius: 8.75px;
+        border-top-right-radius: 0px;
+        align-self: flex-end;
+        font-weight: 500;
+      }
+
+      .msg-2 {
+        font-size: 1.2rem;
+        height: fit-content;
+        font-weight: 500;
+        width: fit-content;
+        padding: 15px;
+        background-color: var(--primaryColour);
+        color: white;
+        border-radius: 8.75px;
+        border-top-left-radius: 0px;
+      }
+
+      .chatCtrl {
+        padding: 0.5rem 1rem;
+      }
+
+      .chatCtrl > form {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .chatCtrl > form > input {
+        padding: 0 1rem 0 1rem;
+        height: 80%;
+        width: 85%;
+        outline: none;
+        border: 0.1px solid var(--primaryColour);
+        border-radius: 8.75px;
+        color: var(--primaryColour);
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .chatCtrl > form > button {
+        height: 80%;
+        width: 15%;
+        background-color: var(--primaryColour);
+        border: none;
+        outline: none;
+        border-radius: 8.75px;
+        color: white;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+
+      @media screen and (max-width: 500px) {
+        .body {
+          overflow: hidden;
+        }
+      }
+      @media screen and (max-width: 400px) {
+        .body {
+          overflow: hidden;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profileSec">
+      <div class="profileDetsSec">
+        <div class="profileInfo">
+          <div class="dpImg">
+            <i class="ri-account-circle-fill"></i>
+            <img
+              src="https://images.unsplash.com/photo-1533656812321-1868a4d2b72a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+              alt=""
+            />
+          </div>
+          <i class="ri-whatsapp-fill logo"></i>
+          <h6>Alina Rose</h6>
+          <h6>@iam_alinarose</h6>
+        </div>
+        <div class="participants">
+          <div class="room">
+            <h6>Room</h6>
+            <h6>Family Chat</h6>
+            <h6>Participants</h6>
+          </div>
+          <div class="participantsConsole">
+            <span>
+              <div class="parImg">
+                <i class="ri-account-circle-fill"></i>
+                <img
+                  src="https://images.unsplash.com/photo-1533656812321-1868a4d2b72a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+                  alt=""
+                />
+              </div>
+              <h6>Alina Rose</h6>
+            </span>
+            <span>
+              <div class="parImg">
+                <i class="ri-account-circle-fill"></i>
+                <img
+                  src="https://images.unsplash.com/photo-1533656812321-1868a4d2b72a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+                  alt=""
+                />
+              </div>
+              <h6>Alina Rose</h6>
+            </span>
+            <span>
+              <div class="parImg">
+                <i class="ri-account-circle-fill"></i>
+                <img
+                  src="https://images.unsplash.com/photo-1533656812321-1868a4d2b72a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+                  alt=""
+                />
+              </div>
+              <h6>Alina Rose</h6>
+            </span>
+            <span>
+              <div class="parImg">
+                <i class="ri-account-circle-fill"></i>
+                <img
+                  src="https://images.unsplash.com/photo-1533656812321-1868a4d2b72a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80"
+                  alt=""
+                />
+              </div>
+              <h6>Alina Rose</h6>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="chatConsole">
+        <div class="chatNav">
+          <i class="ri-whatsapp-fill logo"><span>IChatApp</span></i>
+          <h6>Alina is typing...</h6>
+          <a href="/leaveChat"><button>Leave Chat</button></a>
+        </div>
+        <div class="chatsArea">
+          <div class="sender msg">Lorem ipsum dolor sit amet.</div>
+          <div class="reciever msg-2">Lorem, ipsum dolor.</div>
+        </div>
+        <div class="chatCtrl">
+          <form action="">
+            <input type="text" name="" id="" placeholder="Type a message" />
+            <button>Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
